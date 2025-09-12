@@ -1,21 +1,6 @@
-class Cartes {
-    private nom:string;
-    private valeur:number;
-    private symbol:string;
+import { Cartes } from "./Cartes.ts";
 
-    constructor(nom:string, valeur:number, symbol:string) {
-        this.nom = nom;
-        this.valeur = valeur;
-        this.symbol = symbol;
-    }
-    getNom():string {return this.nom;}
-    getValeur():number {return this.valeur;}
-    getSymbol():string {return this.symbol;}
-
-    afficheCarte():void {console.log(this.nom+""+this.symbol);}
-}
-
-class Couleur {
+export class Couleur {
     private nb_carte:number;
     private nom:string;
     private symbol:string;
@@ -76,43 +61,3 @@ class Couleur {
         }
     }
 }
-
-class Pioche {
-    private cartes:Array<Cartes>;
-    private lst:Array<Cartes>;
-
-    constructor() {
-        // Crée un tableau plat de 52 cartes
-        this.cartes = [
-            ...new Couleur("pic").getCartes(),
-            ...new Couleur("trefle").getCartes(),
-            ...new Couleur("carreau").getCartes(),
-            ...new Couleur("coeur").getCartes()
-        ];
-        this.lst = [];
-        this.remplirPioche();
-    }
-
-    remplirPioche():void {
-        // Mélange le tableau de cartes
-        for (let i = this.cartes.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.cartes[i], this.cartes[j]] = [this.cartes[j], this.cartes[i]];
-        }
-        // Copie les cartes mélangées dans lst
-        this.lst = [...this.cartes];
-    }
-
-    getPioche():Array<Cartes> {return this.lst;}
-
-    affichePioche():void {
-        for (let i = 0; i < this.lst.length; i++) {
-            this.lst[i].afficheCarte();
-        }
-        console.log(this.lst.length);
-    }
-}
-
-const p = new Pioche();
-
-p.affichePioche();
