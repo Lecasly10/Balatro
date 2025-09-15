@@ -1,11 +1,8 @@
 //import { Couleur } from "./couleur.ts";
-import * as readline from "node:readline";
-import { process } from "node";
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+console.log("Bienvenue dans le jeu du Balatro !");
+const r = prompt("Appuyez sur Entrée pour commencer...");
+console.log(r);
 
 class Couleur {
     private nb_carte:number;
@@ -144,12 +141,8 @@ class game {
             this.mainJouee.push(carte);
             this.main.splice(i, 1);
         }
-        rl.question("Entrez une ligne : ", (answer) => {
-        console.log(`Vous avez écrit : ${answer}`);
-        rl.close();
-});
     }
 }
 
-const g = new game();
-g.start();
+// const g = new game();
+// g.start();
