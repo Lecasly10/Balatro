@@ -1,9 +1,5 @@
 //import { Couleur } from "./couleur.ts";
 
-console.log("Bienvenue dans le jeu du Balatro !");
-const r = prompt("Appuyez sur Entrée pour commencer...");
-console.log(r);
-
 class Couleur {
     private nb_carte:number;
     private nom:string;
@@ -133,16 +129,31 @@ class game {
         console.log("\nMain du joueur :");
         this.main.forEach(c => c.afficheCarte());
         console.log("\nHealth : "+this.health);
+        this.choixCarte();
+        this.mainJouee.forEach(c => c.afficheCarte());
+        this.combinaison();
     }
 
     choixCarte():void {
-        for (let i = 0; i < 6; i++) {
-            const carte = this.main[i];
-            this.mainJouee.push(carte);
-            this.main.splice(i, 1);
+        const nb_carte = parseInt(prompt("Combien de cartes voulez-vous jouer ? (1-5) : ")!);
+        let i = 0;
+
+        while (i < nb_carte) {
+            this.main.forEach(c => c.afficheCarte());
+            const c: number = parseInt(prompt("Indiquez l'indexe de la carte que vous voulez ajouter à votre main.(1-" + this.main.length + ")")!);
+            if (c >= 1 && c <= this.main.length) {
+                this.mainJouee.push(this.main[c - 1]);
+                this.main.splice(c - 1, 1);
+                i++;
+            }
         }
+    }
+
+    combinaison():void {
+        // A implémenter
     }
 }
 
-// const g = new game();
-// g.start();
+const g = new game();
+g.start();
+
