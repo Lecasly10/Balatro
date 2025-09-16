@@ -124,6 +124,9 @@ class game {
         this.mainJouee = [];
     }
 
+    setMainJouee(mj:Array<Cartes>) {this.mainJouee = mj;}
+    getMainJouee():Array<Cartes> {return this.mainJouee;}
+
     start():void {
         for (let i = 0; i < 8; i++) this.main.push(this.pioche.getPioche().pop()!);
         console.log("\nMain du joueur :");
@@ -149,11 +152,36 @@ class game {
         }
     }
 
+    paire():number{
+        let found = false;
+        let i = 0;
+
+        for (; i < this.mainJouee.length; i++) {
+            for (let j = i + 1; j < this.mainJouee.length; j++) {
+                if (this.mainJouee[i].getNom() === this.mainJouee[j].getNom()) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+        }
+        return this.mainJouee[i].getValeur();
+    }
+
     combinaison():void {
-        // A implémenter
+        if (this.paire() != -1) {
+            console.log("Vous avez une paire ! Vous gagnez 100 points de vie.");
+            this.health -= 10+(2*this.paire()); //10+(2*valeur de la paire)
+        }
+        else {
+
     }
 }
 
 const g = new game();
-g.start();
+//g.start();
+const c0 = new Cartes("A",11,"♠");
+const c1 = new Cartes("A",11,"♦");
+g.setMainJouee([c0, c1])
+g.combinaison();
 
